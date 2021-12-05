@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="{% static 'js/tweets.js' %}"></script>
+</head>
+<body>
+    <h2>投稿する</h2>
+    <form action="{% url 'tweets' %}" method="POST" name="form">
+        {% csrf_token %}
+        <div>
+            <label>ユーザ名</label>
+            <input type="text" name="user">
+        </div>
+        <div>
+            <label>投稿内容</label>
+            <textarea cols="60" rows="10" name="content"></textarea>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <h2>検索</h2>
+    <form action="{% url 'search' %}" method="POST" name="form2">
+        {% csrf_token %}
+        <div>
+            <label>idで検索</label>
+            <input type="text" name="search">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <form action="{% url 'search2' %}" method="POST" name="form3">
+        {% csrf_token %}
+        <div>
+            <label>ユーザで検索</label>
+            <input type="text" name="user_search" id="search_user">
+            <ul id = "user_result"></ul>
+        </div>
+        <div>
+            <label>逆順</label>
+            <input type="checkbox" value="reverse" name="reverse">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <h2>編集、削除</h2>
+    <form action="{% url 'EditDelete' %}" method="POST" name="form4">
+        {% csrf_token %}
+        <div>
+            <label>idで検索</label>
+            <input type="text" name="id_search">
+        </div>
+        <div>
+            <label>変えたいテキスト</label>
+            <input type="text" name="content">
+        </div>
+        <div>
+            <label>編集</label>
+            <input type="radio" value="edit" name="which">
+            <label>削除</label>
+            <input type="radio" value="delete" name="which">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <h2>ツイート一覧</h2>
+    {% for tweet in tweets_result %}
+        <h3>{{tweet.id}}: {{tweet.user}}: {{tweet.time}}</h3>
+        <p>{{tweet.content}}</p>
+        <br>
+    {% endfor %}
+</body>
+</html>

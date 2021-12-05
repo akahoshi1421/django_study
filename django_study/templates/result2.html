@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>結果</h1>
+    {% if results %}
+        {% for result in results %}
+            <h3>{{result.id}}: {{result.user}}: {{result.time}}</h3>
+            <p>{{result.content}}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

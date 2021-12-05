@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    <script src="{% static 'js/test.js' %}"></script>
+</head>
+<body>
+    {% if result %}
+        <p>あなたが入力したのは{{result}}です！</p>
+    {% else %}
+        <p>文字を入力してください</p>
+    {% endif %}
+    <form action = "http://127.0.0.1:8000/study/form" method="POST" name = "form">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="content">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</body>
+</html>
